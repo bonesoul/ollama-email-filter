@@ -27,3 +27,16 @@ This guide will help you set up your own Google API client and configure the `gm
 1. Rename the downloaded JSON file containing your OAuth 2.0 credentials to `google_cred.json`.
 2. Place the `google_cred.json` file in the `etc` directory located in the same directory as your `gmail_spam_filter.py` script.
 3. If the `etc` directory does not exist, create it at the same level as `gmail_spam_filter.py`.
+
+
+## Contributions Wanted
+
+We are actively seeking contributions to extend the functionality of the Ollama Email Filter. If you're interested in contributing, here are some areas where we'd love your help:
+
+- **Microsoft Outlook Integration**: Develop a provider similar to `GmailProvider` that interfaces with Microsoft Outlook, allowing users to filter and classify emails within Outlook.
+
+- **POP3/IMAP Support**: Implement support for email accounts that use POP3 or IMAP protocols, expanding the range of email services that can be used with our filter.
+
+- **Additional Classification Actions**: Create new actions for classifying emails into categories beyond sales or promotion, such as personal, work-related, or spam from different categories.
+
+If you would like to contribute to any of these areas, please fork the repository, make your changes, and submit a pull request. For more information on how to contribute, please see our `CONTRIBUTING.md` file.

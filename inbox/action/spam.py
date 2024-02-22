@@ -25,7 +25,7 @@ Hi, I'm reaching out to see if you'd be interested in our new product.
 {
 "isSalesOrPromotion": true
 }
-```answer
+```
 
 Classify the email below:
 ```email

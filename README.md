@@ -1,6 +1,6 @@
 # Ollama Email Filter 
 
-Filter your emails locally with privacy perserving LLMs!
+Filter, tag, and organize your emails locally with privacy perserving LLMs.
 
 ## Setup Guide
 

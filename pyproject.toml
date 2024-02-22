@@ -1,21 +1,21 @@
 [tool.poetry]
-name = "GmailAPIWrapper"
+name = "OllamaEmailFilter"
 version = "0.1.0"
-description = "A simple wrapper for Gmail API to interact with Gmail services."
+description = "A simple wrapper for using a local LLM to filter and classify incoming emails."
 authors = ["Han Wang <han.wang.2718+dev@gmail.com>"]
 license = "MIT"
+packages = [
+    { include = "inbox" },
+    { include = "inbox/**/*.py" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-google-auth-oauthlib = "*"
-google-auth-httplib2 = "*"
-google-api-python-client = "*"
-langchain = "*"
-langchain_core = "*"
-langchain_openai = "*"
-langchain-community = "*"
-ollama = "*"
-bs4 = "*"
+google-auth-oauthlib = "1.2.0"
+google-auth-httplib2 = "0.2.0"
+google-api-python-client = "2.119.0"
+ollama = "0.1.6"
+beautifulsoup4 = "4.12.3"
 
 [tool.poetry.dev-dependencies]
 

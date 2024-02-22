@@ -1,11 +1,35 @@
 import re
 from inbox.action.message import MessageAction
 from email.message import Message
-from email.header import decode_header
 from bs4 import BeautifulSoup
 import json
 
 import ollama
+
+# This file defines a SpamClassifyAction class that extends MessageAction.
+# It is designed to classify emails as sales or promotion using the Ollama LLM.
+# The class includes methods for extracting text from email messages and
+# consolidating whitespace for cleaner processing. It is part of a larger system
+# that interacts with email inboxes and performs actions on email messages.
+
+base_prompt = '''
+You are a highly intelligent AI trained to identify sales outreach or promotion emails.
+You only respond in JSON with format {"isSalesOrPromotion": "boolean"}. 
+
+So for example the following email:
+```email
+Hi, I'm reaching out to see if you'd be interested in our new product.
+```
+
+```answer
+{
+"isSalesOrPromotion": true
+}
+```answer
+
+Classify the email below:
+```email
+'''
 
 def consolidate_whitespace(text):
     # Normalize Windows style newlines to Unix style
@@ -58,37 +82,8 @@ class SpamClassifyAction(MessageAction):
         email_content = self.extract_text(email_message)
 
         email_content = consolidate_whitespace(email_content)[:1000]  # Limit the email content to 5000 characters
-        
-        # json_schema = {
-        #     "answer": "boolean"
-        # }
 
-        # dumps = json.dumps(json_schema, indent=2)
-
-        # prompt = ChatPromptTemplate.from_messages([
-        #     ("system", "You are a highly intelligent AI trained to identify sales outreach emails. You only respond in JSON with format {{\"isSalesOutreach\": \"boolean\"}}."),
-        #     ("human", "Is this email an unsolicited sales outreach? Respond in JSON with format {{\"isSalesOutreach\": \"boolean\"}}\n\nEmail:\n###{email_content}\n###\n")
-        # ])
-        # chain = prompt | self.chat_model | output_parser
-        # response = chain.invoke({"email_content": email_content, "dumps": dumps})
-        prompt='''
-You are a highly intelligent AI trained to identify sales outreach or promotion emails.
-You only respond in JSON with format {"isSalesOrPromotion": "boolean"}. 
-
-So for example the following email:
-```email
-Hi, I'm reaching out to see if you'd be interested in our new product.
-```
-
-```answer
-{
-"isSalesOrPromotion": true
-}
-```answer
-
-Classify the email below:
-```email
-'''
+        prompt = base_prompt
         prompt += email_content
         prompt += "\n```"
         
